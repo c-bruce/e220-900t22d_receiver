@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 
 // const int ledPin = 13; // the number of the LED pin
 // char incomingByte; // for incoming serial data
@@ -29,15 +30,18 @@ struct SensorData {
   float voltage;
 };
 
+SoftwareSerial loraSerial(2, 3); // RX, TX
+
 SensorData receivedData;
 
 void setup() {
   Serial.begin(9600);
+  loraSerial.begin(9600);
 }
 
 void loop() {
-  if (Serial.available() >= sizeof(SensorData)) {
-    Serial.readBytes((uint8_t *)&receivedData, sizeof(SensorData));
+  if (loraSerial.available() >= sizeof(SensorData)) {
+    loraSerial.readBytes((uint8_t *)&receivedData, sizeof(SensorData));
     Serial.print("Temperature: ");
     Serial.print(receivedData.temperature);
     Serial.print(" | Voltage: ");
