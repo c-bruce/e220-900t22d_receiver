@@ -26,8 +26,23 @@
 // }
 
 struct SensorData {
-  int temperature;
-  float voltage;
+  // BPM-280
+  float temperature;
+  float pressure;
+  float altitude;
+  // MPU-6050
+  float accX;
+  float accY;
+  float accZ;
+  float gyroX;
+  float gyroY;
+  float gyroZ;
+  // GPS
+  float latitude;
+  float longitude;
+  float altitudeGPS;
+  float speed;
+  float course;
 };
 
 SoftwareSerial loraSerial(2, 3); // RX, TX
@@ -45,6 +60,32 @@ void loop() {
     Serial.print("Temperature: ");
     Serial.print(receivedData.temperature);
     Serial.print(" | Voltage: ");
-    Serial.println(receivedData.voltage);
+    Serial.print(receivedData.pressure);
+    Serial.print(" | Altitude: ");
+    Serial.println(receivedData.altitude);
+    Serial.print("AccX: ");
+    Serial.print(receivedData.accX);
+    Serial.print(" | AccY: ");
+    Serial.print(receivedData.accY);
+    Serial.print(" | AccZ: ");
+    Serial.print(receivedData.accZ);
+    Serial.print(" | GyroX: ");
+    Serial.print(receivedData.gyroX);
+    Serial.print(" | GyroY: ");
+    Serial.print(receivedData.gyroY);
+    Serial.print(" | GyroZ: ");
+    Serial.println(receivedData.gyroZ);
+    Serial.print("Latitude: ");
+    Serial.print(receivedData.latitude);
+    Serial.print(" | Longitude: ");
+    Serial.print(receivedData.longitude);
+    Serial.print(" | AltitudeGPS: ");
+    Serial.print(receivedData.altitudeGPS);
+    Serial.print(" | Speed: ");
+    Serial.print(receivedData.speed);
+    Serial.print(" | Course: ");
+    Serial.println(receivedData.course);
+    Serial.println("------------------------------------------------");
+
   }
 }
